@@ -1,0 +1,280 @@
+/* ------------------------------
+GENERAL STYLES
+------------------------------ */
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 5px; /* Small readable font */
+  line-height: 1.5;
+  background-color: #ffffff;
+  color: #333;
+}
+
+a {
+  color: #198754;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #145c39;
+  text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 700;
+  color: #145c39;
+}
+
+/* ------------------------------
+NAVBAR
+------------------------------ */
+.bg-light-green {
+  background-color: #E9F8EE !important;
+}
+
+.navbar-brand {
+  font-size: 16px;
+}
+
+.nav-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: #333 !important;
+}
+
+.nav-link:hover {
+  color: #198754 !important;
+}
+
+.btn {
+  font-size: 13px !important;
+  padding: 6px 16px !important;
+  border-radius: 20px !important;
+}
+
+.btn-success {
+  background-color: #198754 !important;
+  border-color: #198754 !important;
+}
+
+.btn-success:hover {
+  background-color: #157347 !important;
+  border-color: #157347 !important;
+}
+
+.btn-outline-success {
+  color: #198754 !important;
+  border-color: #198754 !important;
+}
+
+.btn-outline-success:hover {
+  background-color: #198754 !important;
+  color: #fff !important;
+}
+
+/* ------------------------------
+HERO SECTION
+------------------------------ */
+.hero-section {
+  padding: 60px 0;
+  background-color: #f8fff9;
+}
+
+.hero-title {
+  font-size: 22px;
+  line-height: 1.4;
+  color: #145c39;
+}
+
+.hero-description {
+  font-size: 13px;
+  color: #555;
+  margin-top: 10px;
+  max-width: 600px;
+}
+
+.hero-buttons .btn-lg {
+  font-size: 13px !important;
+  padding: 8px 18px !important;
+  border-radius: 20px;
+}
+
+.hero-img {
+  max-width: 95%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* ------------------------------
+FEATURES SECTION
+------------------------------ */
+.features-section {
+  background-color: #f8fdf9;
+}
+
+.features-section h2 {
+  font-size: 20px;
+}
+
+.features-section .card {
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.features-section .card:hover {
+  transform: translateY(-4px);
+}
+
+.features-section .card-body {
+  padding: 18px;
+}
+
+.features-section h5 {
+  font-size: 15px;
+}
+
+.features-section p {
+  font-size: 12px;
+  color: #666;
+}
+
+/* ------------------------------
+PRICING SECTION
+------------------------------ */
+#pricing h2 {
+  font-size: 20px;
+}
+
+.card-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #198754;
+}
+
+#pricing ul li {
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.popular-badge {
+  font-size: 10px;
+  padding: 4px 10px;
+}
+
+/* ------------------------------
+CONTACT SECTION
+------------------------------ */
+#contact h2 {
+  font-size: 20px;
+}
+
+#contact .form-label {
+  font-size: 12px;
+}
+
+#contact input,
+#contact textarea {
+  font-size: 12px;
+  padding: 8px;
+}
+
+#contact .btn {
+  font-size: 13px;
+  padding: 8px;
+}
+
+/* ------------------------------
+FAQ SECTION
+------------------------------ */
+.bg-light-green {
+  background-color: #E9F8EE !important;
+}
+
+#faq h2 {
+  font-size: 20px;
+}
+
+.accordion-button {
+  font-size: 13px;
+}
+
+.accordion-body {
+  font-size: 12px;
+  color: #555;
+}
+
+/* ------------------------------
+FOOTER
+------------------------------ */
+.footer {
+  background-color: #145c39;
+  color: #fff;
+  position: relative;
+}
+
+.footer h4, .footer h6 {
+  font-size: 14px;
+}
+
+.footer p, .footer a {
+  font-size: 12px;
+  color: #dcdcdc;
+}
+
+.footer a:hover {
+  color: #fff;
+}
+
+.social-icon {
+  display: inline-block;
+  font-size: 16px;
+  color: #dcdcdc;
+  margin-right: 10px;
+  transition: 0.3s;
+}
+
+.social-icon:hover {
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.footer-bottom {
+  background-color: #0e4428;
+  font-size: 11px;
+}
+
+/* ------------------------------
+BACK TO TOP BUTTON
+------------------------------ */
+#backToTop {
+  display: none;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background-color: #198754;
+  color: #fff;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 999;
+}
+
+#backToTop:hover {
+  background-color: #157347;
+}
+
+/* ------------------------------
+RESPONSIVE TWEAKS
+------------------------------ */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 18px;
+  }
+  .hero-description {
+    font-size: 12px;
+  }
+  .card-price {
+    font-size: 16px;
+  }
+}

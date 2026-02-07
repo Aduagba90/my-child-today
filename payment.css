@@ -1,0 +1,50 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f9fbf7;
+}
+
+/* Navbar */
+.navbar.bg-light-green {
+  background-color: #F9FBF7 !important;
+}
+.nav-link {
+  color: #333;
+  font-weight: 500;
+}
+.nav-link:hover {
+  color: #28a745;
+}
+
+/* Payment Card */
+.card {
+  border-radius: 15px;
+  border: none;
+}
+.card h3 {
+  color: #28a745;
+}
+
+.selected-plan h5 {
+  font-size: 1.25rem;
+}
+.selected-plan p {
+  font-size: 1rem;
+}
+
+/* Buttons */
+.btn-success {
+  background-color: #28a745;
+  border: none;
+}
+.btn-success:hover {
+  background-color: #218838;
+}
+
+/* Success Modal */
+.modal-content {
+  border-radius: 15px;
+  border: none;
+}
+.modal-content h4 {
+  color: #28a745;
+}

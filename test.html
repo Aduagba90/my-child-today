@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Backend Test</title>
+</head>
+<body>
+
+  <button id="test">Test Backend</button>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+
+      $("#test").click(function () {
+        alert("Button clicked");
+
+        $.get("http://localhost:5000", function (data) {
+          alert(data);
+        }).fail(function () {
+          alert("Failed to connect to backend");
+        });
+
+      });
+
+    });
+  </script>
+
+</body>
+</html>

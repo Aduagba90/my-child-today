@@ -1,0 +1,138 @@
+body {
+  background-color: #f8f9fa;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: linear-gradient(180deg, #1E5128 0%, #145214 100%);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+/* Sidebar Header */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-left: 22px;
+  margin-top: 28px;
+}
+
+.sidebar-header span {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #eaf6ea; /* subtle soft white text tone */
+}
+
+.sidebar-icon {
+  font-size: 1.6rem;
+  margin-right: 10px;
+  color: #a7d7a7; /* soft light-green accent for the icon */
+}
+
+/* Sidebar Links */
+.sidebar a {
+  display: block;
+  color: #ffffffcc;
+  padding: 12px 22px;
+  font-weight: 500;
+  transition: background 0.3s ease, color 0.3s ease;
+  border-radius: 6px;
+  margin: 4px 0;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background-color: #267343;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Active Nav Link Highlight */
+.sidebar .nav-link.active,
+.sidebar .nav-link:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+}
+
+/* ===== Logout Button (Red tone) ===== */
+.logout-btn {
+  background-color: #dc3545;
+  color: #fff;
+  border: 1px solid #bb2d3b;
+  border-radius: 6px;
+  padding: 5px 20px;
+  font-weight: 600;
+  width: fit-content;
+  align-self: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #b02a37;
+  border-color: #a02632;
+}
+
+/* ===== Content Area ===== */
+.content {
+  margin-left: 250px;
+  padding: 2rem;
+}
+
+/* ===== Stat Cards ===== */
+.stat-card {
+  border: none;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  padding: 15px 18px;
+}
+
+.stat-card h6 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.stat-icon {
+  font-size: 1.7rem;
+  color: #1e5128;
+}
+
+/* ===== Table Styling ===== */
+.table th {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+
+.table td {
+  font-size: 0.9rem;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 6px 8px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    height: auto;
+    width: 100%;
+  }
+
+  .content {
+    margin-left: 0;
+  }
+}

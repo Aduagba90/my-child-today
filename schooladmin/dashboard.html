@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - My Child Today</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/dashboard.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    /* Styles — kept largely from your original with minimal changes */
+    body, .sidebar, .content, .card, .table, button, a, h1, h2, h3, h4, h5, h6, p, span, td, th {
+      font-size: 11px !important;
+      line-height: 1.2 !important;
+      font-family: 'Roboto', sans-serif;
+      color: #333;
+    }
+    h1, h2, h3 { font-size: 13px !important; font-weight: 600 !important; }
+
+    .sidebar {
+      width: 190px !important;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow-y: auto;
+      background-color: #2f3e46;
+      color: #fff !important;
+      z-index: 100;
+      padding-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .sidebar .sidebar-header { display:flex; align-items:center; gap:6px; margin-bottom:.8rem; padding:0 10px; }
+    .sidebar .sidebar-header span { font-size:11px !important; font-weight:600; color:#fff !important; }
+    .sidebar .nav-link { display:flex; align-items:center; font-size:10.5px !important; padding:6px 10px !important; border-radius:6px; color:#e0e0e0 !important; transition: background .25s ease, color .25s ease; }
+    .sidebar .nav-link:hover, .sidebar .nav-link.active { background-color:#009688; color:#fff !important; }
+
+    .logout-section { padding: .5rem 10px !important; width:100%; border-top:1px solid rgba(255,255,255,0.2); }
+    .logout-btn { font-size:10px !important; padding:5px 8px !important; border-radius:5px !important; display:flex; align-items:center; justify-content:center; gap:4px; width:100%; background-color:#dc3545; color:#fff !important; border:none; transition:background .2s ease; }
+    .logout-btn:hover { background-color:#c82333; }
+
+    .content { margin-left:190px; padding:1rem !important; font-size:11px !important; background-color:#f8f9fa; min-height:100vh; }
+    .card { padding:.6rem !important; border-radius:8px !important; box-shadow:0 1px 4px rgba(0,0,0,.05); background-color:#fff; }
+    .stat-card h6 { font-size:10px !important; }
+    .stat-card h3 { font-size:15px !important; }
+    .stat-icon { font-size:1.2rem !important; }
+
+    .table th, .table td { font-size:10px !important; padding:4px 6px !important; vertical-align: middle !important; }
+    .table th { font-weight:600 !important; }
+
+    .chart-container { font-size:10px !important; }
+    canvas { max-height:180px !important; }
+
+    .floating-cta { font-size:10.5px !important; padding:7px 12px !important; border-radius:30px !important; position:fixed; bottom:25px; right:25px; z-index:200; background-color:#009688; color:#fff; border:none; transition:background .25s ease; }
+    .floating-cta:hover { background-color:#00796b; transform:scale(1.03); }
+
+    .stat-card { transition: transform .2s; }
+    .stat-card:hover { transform: scale(1.03); }
+
+    @media (max-width:768px) { .chart-container { margin-top:1rem; } }
+  </style>
+</head>
+<body>
+
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="sidebar-header d-flex align-items-center mb-4">
+        <i class="bi bi-mortarboard-fill sidebar-icon"></i>
+        <span>School Admin</span>
+      </div>
+      <ul class="nav flex-column px-3">
+        <li class="nav-item"><a href="#" class="nav-link active"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+        <li class="nav-item"><a href="students.html" class="nav-link"><i class="bi bi-people me-2"></i>Students</a></li>
+        <li class="nav-item"><a href="attendance.html" class="nav-link"><i class="bi bi-check-circle me-2"></i>Attendance</a></li>
+        <li class="nav-item"><a href="sms.html" class="nav-link"><i class="bi bi-chat-dots me-2"></i>SMS</a></li>
+        <li class="nav-item"><a href="reports.html" class="nav-link"><i class="bi bi-graph-up me-2"></i>Reports</a></li>
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#changePasswordModal"><i class="bi bi-key me-2"></i>Change Password</a>
+        </li>
+      </ul>
+
+      <div class="logout-section mt-auto px-3 mb-3">
+        <button class="logout-btn w-100 btn btn-danger"><i class="bi bi-box-arrow-right me-2"></i>Logout</button>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="content flex-grow-1 p-4">
+      <h2 class="fw-bold mb-1">Dashboard</h2>
+      <p class="text-muted mb-4">Welcome back! Here’s what’s happening at your school today.</p>
+      <hr>
+
+      <!-- Top stat cards -->
+      <div class="row g-4 mb-4">
+        <div class="col-md-4">
+          <div class="card stat-card shadow-sm p-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <h6 class="fw-semibold mb-0">Total Students</h6>
+              <i class="bi bi-people-fill stat-icon"></i>
+            </div>
+            <div class="d-flex justify-content-between align-items-end mt-4">
+              <h3 class="fw-bold mb-0" id="totalStudents">0</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card stat-card shadow-sm p-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <h6 class="fw-semibold mb-0">Attendance</h6>
+              <i class="bi bi-check2-circle stat-icon"></i>
+            </div>
+            <div class="d-flex justify-content-between align-items-end mt-4">
+              <h3 class="fw-bold mb-0" id="attendancePercent">0%</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card stat-card shadow-sm p-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <h6 class="fw-semibold mb-0">SMS Usage</h6>
+              <i class="bi bi-chat-dots-fill stat-icon"></i>
+            </div>
+            <div class="d-flex justify-content-between align-items-end mt-4">
+              <h3 class="fw-bold mb-0" id="smsUsage">0</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts -->
+      <div class="row g-4 mb-4">
+        <div class="col-md-6 chart-container">
+          <div class="card shadow-sm p-3">
+            <h6 class="fw-bold mb-3">Attendance Trend</h6>
+            <canvas id="attendanceChart" height="200"></canvas>
+          </div>
+        </div>
+        <div class="col-md-6 chart-container">
+          <div class="card shadow-sm p-3">
+            <h6 class="fw-bold mb-3">SMS Sent Trend</h6>
+            <canvas id="smsChart" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tables -->
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card shadow-sm p-3 h-100">
+            <h6 class="fw-bold mb-3">Recent Attendance</h6>
+            <div class="table-responsive">
+              <table class="table table-sm table-hover align-middle">
+                <thead class="table-light">
+                  <tr><th>Student</th><th>Class</th><th>Status</th><th>Time</th></tr>
+                </thead>
+                <tbody id="recentAttendanceTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card shadow-sm p-3 h-100">
+            <h6 class="fw-bold mb-3">Recent SMS Logs</h6>
+            <div class="table-responsive">
+              <table class="table table-sm table-hover align-middle">
+                <thead class="table-light">
+                  <tr><th>Recipient</th><th>Message</th><th>Time</th><th>Status</th></tr>
+                </thead>
+                <tbody id="recentSmsTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Floating CTA -->
+  <a href="#" class="floating-cta" id="dashboardCTA">View Detailed Reports</a>
+
+  <!-- Change Password Modal -->
+  <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="changePasswordLabel">Change Password</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="changePasswordForm" autocomplete="off">
+            <div class="mb-3">
+              <label for="currentPassword" class="form-label">Current Password</label>
+              <input type="password" class="form-control" id="currentPassword" required autocomplete="current-password">
+            </div>
+            <div class="mb-3">
+              <label for="newPassword" class="form-label">New Password</label>
+              <input type="password" class="form-control" id="newPassword" required autocomplete="new-password">
+            </div>
+            <div class="mb-3">
+              <label for="confirmPassword" class="form-label">Confirm New Password</label>
+              <input type="password" class="form-control" id="confirmPassword" required autocomplete="new-password">
+            </div>
+            <button type="submit" class="btn btn-success w-100" id="changePasswordBtn">Update Password</button>
+          </form>
+          <div id="passwordMessage" class="mt-2" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // --------------------------
+    // Configuration
+    // --------------------------
+    // If your backend runs at a different origin (e.g. http://localhost:8080),
+    // set API_BASE accordingly. For same-host deployments keep it empty ''.
+    const API_BASE = 'http://localhost:8080'; // replace with your backend host & port
+
+    // --------------------------
+    // Simulated dashboard data
+    // --------------------------
+    const totalStudents = Math.floor(Math.random() * 1000) + 100;
+    const attendancePercent = Math.floor(Math.random() * 10) + 90;
+    const smsUsage = Math.floor(Math.random() * 500) + 500;
+
+    document.getElementById('totalStudents').textContent = totalStudents;
+    document.getElementById('attendancePercent').textContent = attendancePercent + '%';
+    document.getElementById('smsUsage').textContent = smsUsage;
+
+    // --------------------------
+    // Sample table data (safe render)
+    // --------------------------
+    const attendanceData = [
+      { name: 'Aliyu Musa', className: 'JSS 2A', status: 'Present', time: '08:10 AM' },
+      { name: 'Maryam Bello', className: 'SSS 1B', status: 'Absent', time: '--' },
+      { name: 'Kehinde Ade', className: 'JSS 3B', status: 'Present', time: '08:05 AM' },
+      { name: 'Fatima Yusuf', className: 'JSS 1A', status: 'Present', time: '08:15 AM' },
+      { name: 'Ahmed Bello', className: 'SSS 2A', status: 'Absent', time: '--' }
+    ];
+    const smsData = [
+      { recipient: 'Parent (Aliyu)', message: 'Aliyu attended class today.', time: '08:20 AM', status: 'Sent' },
+      { recipient: 'Parent (Maryam)', message: 'Maryam absent today.', time: '08:30 AM', status: 'Failed' },
+      { recipient: 'Parent (Kehinde)', message: 'Kehinde present today.', time: '08:25 AM', status: 'Sent' },
+      { recipient: 'Parent (Fatima)', message: 'Fatima present today.', time: '08:40 AM', status: 'Sent' }
+    ];
+
+    function safePopulateAttendance(rows) {
+      const tbody = document.getElementById('recentAttendanceTable');
+      tbody.innerHTML = '';
+      rows.forEach(r => {
+        const tr = document.createElement('tr');
+
+        const tdName = document.createElement('td'); tdName.textContent = r.name; tr.appendChild(tdName);
+        const tdClass = document.createElement('td'); tdClass.textContent = r.className; tr.appendChild(tdClass);
+
+        const tdStatus = document.createElement('td');
+        const span = document.createElement('span');
+        span.className = r.status === 'Present' ? 'badge bg-success' : 'badge bg-danger';
+        span.textContent = r.status;
+        tdStatus.appendChild(span);
+        tr.appendChild(tdStatus);
+
+        const tdTime = document.createElement('td'); tdTime.textContent = r.time; tr.appendChild(tdTime);
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    function safePopulateSms(rows) {
+      const tbody = document.getElementById('recentSmsTable');
+      tbody.innerHTML = '';
+      rows.forEach(r => {
+        const tr = document.createElement('tr');
+
+        const tdRecipient = document.createElement('td'); tdRecipient.textContent = r.recipient; tr.appendChild(tdRecipient);
+        const tdMessage = document.createElement('td'); tdMessage.textContent = r.message; tr.appendChild(tdMessage);
+        const tdTime = document.createElement('td'); tdTime.textContent = r.time; tr.appendChild(tdTime);
+
+        const tdStatus = document.createElement('td');
+        const span = document.createElement('span');
+        span.className = r.status === 'Sent' ? 'badge bg-success' : 'badge bg-danger';
+        span.textContent = r.status;
+        tdStatus.appendChild(span);
+        tr.appendChild(tdStatus);
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    safePopulateAttendance(attendanceData);
+    safePopulateSms(smsData);
+
+    // --------------------------
+    // Charts (kept simple)
+    // --------------------------
+    const ctxAttendance = document.getElementById('attendanceChart').getContext('2d');
+    new Chart(ctxAttendance, {
+      type: 'bar',
+      data: {
+        labels: ['Mon','Tue','Wed','Thu','Fri'],
+        datasets: [{
+          label: 'Attendance %',
+          data: Array.from({length:5}, () => Math.floor(Math.random()*10)+90),
+          backgroundColor: '#198754'
+        }]
+      },
+      options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 100 } } }
+    });
+
+    const ctxSMS = document.getElementById('smsChart').getContext('2d');
+    new Chart(ctxSMS, {
+      type: 'bar',
+      data: {
+        labels: ['Mon','Tue','Wed','Thu','Fri'],
+        datasets: [{
+          label: 'SMS Sent',
+          data: Array.from({length:5}, () => Math.floor(Math.random()*100)+200),
+          backgroundColor: '#0d6efd'
+        }]
+      },
+      options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+    });
+
+    // --------------------------
+    // Context-aware CTA
+    // --------------------------
+    function updateCTA(attPct, smsCount) {
+      const cta = document.getElementById('dashboardCTA');
+      if (!cta) return;
+      if (attPct < 95) { cta.textContent = 'Check Low Attendance'; cta.href = 'attendance.html'; }
+      else if (smsCount > 800) { cta.textContent = 'Review SMS Logs'; cta.href = 'sms-logs.html'; }
+      else { cta.textContent = 'View Detailed Reports'; cta.href = 'reports.html'; }
+    }
+    updateCTA(attendancePercent, smsUsage);
+
+    // --------------------------
+    // Logout confirmation
+    // --------------------------
+    document.querySelector('.logout-btn').addEventListener('click', function() {
+      if (confirm('Are you sure you want to logout?')) {
+        window.location.href = '../login.html';
+      }
+    });
+
+    // --------------------------
+    // Change password handling (single, robust handler)
+    // --------------------------
+    const changePasswordForm = document.getElementById('changePasswordForm');
+    const changePasswordBtn = document.getElementById('changePasswordBtn');
+    const passwordMessage = document.getElementById('passwordMessage');
+
+    // Helper: detect stored user more robustly
+    function detectStoredUserIdentifier() {
+      try {
+        const raw = localStorage.getItem('user') || sessionStorage.getItem('user');
+        if (!raw) return null;
+        const obj = JSON.parse(raw);
+        // fallback chain: identifier, email, username, userEmail
+        return obj?.identifier || obj?.email || obj?.username || obj?.userEmail || null;
+      } catch (e) {
+        // invalid JSON
+        return null;
+      }
+    }
+
+    changePasswordForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      passwordMessage.textContent = '';
+      changePasswordBtn.disabled = true;
+      const previousBtnText = changePasswordBtn.textContent;
+      changePasswordBtn.textContent = 'Updating...';
+
+      const email = detectStoredUserIdentifier();
+      const oldPassword = document.getElementById('currentPassword').value;
+      const newPassword = document.getElementById('newPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      if (!email) {
+        passwordMessage.innerHTML = '<span class="text-danger">Unable to detect logged-in user. Please log in again.</span>';
+        changePasswordBtn.disabled = false;
+        changePasswordBtn.textContent = previousBtnText;
+        return;
+      }
+
+      if (newPassword !== confirmPassword) {
+        passwordMessage.innerHTML = '<span class="text-danger">New passwords do not match.</span>';
+        changePasswordBtn.disabled = false;
+        changePasswordBtn.textContent = previousBtnText;
+        return;
+      }
+
+      // Basic client-side password strength suggestion (optional)
+      if (newPassword.length < 6) {
+        passwordMessage.innerHTML = '<span class="text-danger">New password should be at least 6 characters.</span>';
+        changePasswordBtn.disabled = false;
+        changePasswordBtn.textContent = previousBtnText;
+        return;
+      }
+
+      try {
+        const res = await fetch(API_BASE + '/api/auth/change-password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, oldPassword, newPassword })
+        });
+
+        // Attempt to parse JSON body (if server returns JSON)
+        let data = {};
+        try { data = await res.json(); } catch (_) { data = {}; }
+
+        if (res.ok && data.success) {
+          passwordMessage.innerHTML = '<span class="text-success">' + (data.message || 'Password updated successfully!') + '</span>';
+          changePasswordForm.reset();
+          // hide modal safely (getOrCreateInstance)
+          const modalEl = document.getElementById('changePasswordModal');
+          const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+          setTimeout(() => modal.hide(), 900);
+        } else {
+          // show any message from backend for easier debugging
+          const serverMsg = data?.message || (data?.error) || 'Error updating password. Try again.';
+          passwordMessage.innerHTML = '<span class="text-danger">' + serverMsg + '</span>';
+        }
+      } catch (err) {
+        console.error('Change password error:', err);
+        passwordMessage.innerHTML = '<span class="text-danger">Error connecting to server. Check network / backend.</span>';
+      } finally {
+        changePasswordBtn.disabled = false;
+        changePasswordBtn.textContent = previousBtnText;
+      }
+    });
+
+  </script>
+
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDPyFdoFh6kpsnJ9IMrGAvs8egNLkjQe-o",
+    authDomain: "my-child-today-f6c24.firebaseapp.com",
+    projectId: "my-child-today-f6c24",
+    storageBucket: "my-child-today-f6c24.firebasestorage.app",
+    messagingSenderId: "84678623630",
+    appId: "1:84678623630:web:1bc4cfc1890b41bbe4e4df",
+    measurementId: "G-VHSY73TL0V"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+</body>
+</html>

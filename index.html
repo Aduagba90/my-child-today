@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Child Today</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+<style>
+  .hero-section {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Carousel stays behind */
+.hero-section .carousel,
+.hero-section .carousel-inner,
+.hero-section .carousel-item {
+  height: 100%;
+  z-index: 1;
+}
+
+/* Images */
+.hero-section .carousel-inner img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* Dark overlay (VERY IMPORTANT for text visibility) */
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 2;
+}
+
+/* Text stays above everything */
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  text-align: center;
+  color: white;
+  width: 90%;
+  max-width: 700px;
+}
+
+
+</style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light-green py-3 shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-success" href="#">My Child Today</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto me-3">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+        </ul>
+        <a href="login.html" class="btn btn-outline-success">Login</a>
+        <a href="signup.html" class="btn btn-success ms-3">Sign Up</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+<section class="hero-section">
+
+  <!-- Carousel -->
+  <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3500">
+
+    <div class="carousel-inner">
+
+      <div class="carousel-item active">
+        <img src="assets/images/hero.png" class="d-block w-100" alt="School Kids">
+      </div>
+
+      <div class="carousel-item">
+        <img src="assets/images/hero1.jpg" class="d-block w-100" alt="Students Classroom">
+      </div>
+
+      <div class="carousel-item">
+        <img src="assets/images/hero2.jpg" class="d-block w-100" alt="Parents and Kids">
+      </div>
+
+      <div class="carousel-item">
+        <img src="assets/images/hero3.avif" class="d-block w-100" alt="Education Learning">
+      </div>
+
+      <div class="carousel-item">
+        <img src="assets/images/hero4.jpg" class="d-block w-100" alt="Education Learning">
+      </div>
+
+      <div class="carousel-item">
+        <img src="assets/images/hero5.jpeg" class="d-block w-100" alt="Education Learning">
+      </div>
+
+      <div class="carousel-item">
+        <img src="assets/images/hero6.jpg" class="d-block w-100" alt="Education Learning">
+      </div>
+
+      <div class="carousel-item">
+        <img src="assets/images/hero7.jpg" class="d-block w-100" alt="Education Learning">
+      </div>
+
+      <div class="carousel-item">
+        <img src="assets/images/hero8.jpg" class="d-block w-100" alt="Education Learning">
+      </div>
+
+      <div class="carousel-item">
+        <img src="assets/images/hero9.jpg" class="d-block w-100" alt="Education Learning">
+      </div>
+
+      <div class="carousel-item">
+        <img src="assets/images/hero10.jpg" class="d-block w-100" alt="Education Learning">
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Center Text Overlay -->
+  <div class="hero-text">
+    <h1 class="hero-title">
+      My Child Today – The Easiest Way to Manage Attendance & Notify Parents Instantly
+    </h1>
+
+    <p class="hero-description">
+      Track attendance and send SMS notifications to parents effortlessly. Keep parents informed in real time.
+    </p>
+
+    <a href="signup.html" class="btn btn-success btn-lg me-3">
+      Get Started Free
+    </a>
+
+    <a href="#pricing" class="btn btn-outline-light btn-lg">
+      See Plans
+    </a>
+  </div>
+
+</section>
+
+
+<!-- Optional: Control auto-slide speed -->
+<script>
+  var heroCarousel = document.querySelector('#heroCarousel');
+  var carousel = new bootstrap.Carousel(heroCarousel, {
+    interval: 3500, // 3.5 seconds per slide
+    ride: 'carousel'
+  });
+</script>
+
+
+  <!-- Features Section -->
+  <section id="features" class="features-section py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-4 fw-bold">Why Choose My Child Today?</h2>
+      <p class="text-center section-intro mb-5">
+        Stay connected to your child’s growth and learning. Real-time updates, progress tracking, and smart reminders make parenting easier.
+      </p>
+      <div class="row g-4">
+        <div class="col-12 col-md-4">
+          <div class="card text-center shadow-sm h-100">
+            <div class="card-body">
+              <h5 class="fw-bold">📊 Track Attendance</h5>
+              <p class="text-muted">Mark and monitor student attendance in seconds — no paper, no stress.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="card text-center shadow-sm h-100">
+            <div class="card-body">
+              <h5 class="fw-bold">📩 Instant SMS Alerts</h5>
+              <p class="text-muted">Keep parents informed immediately with automatic text updates.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="card text-center shadow-sm h-100">
+            <div class="card-body">
+              <h5 class="fw-bold">📈 Smart Reports</h5>
+              <p class="text-muted">View attendance trends and insights to support better decisions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="py-5" style="background-color:#F9FBF7;">
+    <div class="container">
+      <h2 class="text-center mb-3 fw-bold">Choose Your Plan</h2>
+      <p class="text-center text-muted mb-5">
+        Flexible and affordable plans designed for schools of all sizes.
+      </p>
+      <div class="row g-4 justify-content-center">
+        <!-- Free Trial -->
+        <div class="col-12 col-md-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body text-center">
+              <h5 class="card-title fw-bold">Free Trial</h5>
+              <p class="card-price">₦0 <span class="text-muted">/ 30 days</span></p>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>✔ Attendance tracking</li>
+                <li>✔ SMS alerts (limited)</li>
+                <li>✔ Basic reports</li>
+              </ul>
+              <a href="plans.html" class="btn btn-success">See Plans</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Standard Plan -->
+        <div class="col-12 col-md-4">
+          <div class="card shadow-sm h-100 border-success position-relative">
+            <div class="popular-badge position-absolute top-0 start-50 translate-middle badge rounded-pill bg-success text-white">
+              Most Popular
+            </div>
+            <div class="card-body text-center">
+              <h5 class="card-title fw-bold">Standard</h5>
+              <p class="card-price">₦5,000 <span class="text-muted">/ month</span></p>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>✔ Attendance tracking</li>
+                <li>✔ Bulk SMS alerts</li>
+                <li>✔ Reports & Analytics</li>
+                <li>✔ Priority support</li>
+              </ul>
+              <a href="payment.html?plan=standard" class="btn btn-success w-100">Continue with Standard</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Premium Plan -->
+        <div class="col-12 col-md-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body text-center">
+              <h5 class="card-title fw-bold">Premium</h5>
+              <p class="card-price">₦10,000 <span class="text-muted">/ month</span></p>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>✔ All Standard features</li>
+                <li>✔ Unlimited users</li>
+                <li>✔ Advanced analytics</li>
+                <li>✔ Dedicated account manager</li>
+                <li>✔ Cloud backup & data security</li>
+                <li>✔ Customizable reports</li>
+                <li>✔ API Integration</li>
+              </ul>
+              <a href="payment.html?plan=premium" class="btn btn-success w-100">Continue with Premium</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-5 bg-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="fw-bold">Get in Touch</h2>
+        <p class="text-muted">Have questions or need support? Fill out the form or reach us directly.</p>
+      </div>
+      <div class="row g-4 align-items-stretch">
+        <!-- Form -->
+        <div class="col-md-6 d-flex">
+          <div class="card border-0 shadow-sm flex-fill">
+            <div class="card-body p-4">
+              <form>
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">Full Name</label>
+                  <input type="text" class="form-control" placeholder="Enter your name" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">Email Address</label>
+                  <input type="email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">Message</label>
+                  <textarea class="form-control" rows="5" placeholder="Write your message here..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-success w-100 fw-bold">
+                  <i class="bi bi-send-fill me-2"></i> Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- Info -->
+        <div class="col-md-6 d-flex">
+          <div class="card border-0 shadow-sm flex-fill">
+            <div class="card-body p-4">
+              <h5 class="fw-bold mb-4">Contact Information</h5>
+              <p class="mb-3"><i class="bi bi-geo-alt-fill me-2 text-success"></i> 123 Ejiba Road, Ilorin, Kwara State, Nigeria</p>
+              <p class="mb-3"><i class="bi bi-envelope-fill me-2 text-success"></i> support@mychildtoday.com</p>
+              <p class="mb-3"><i class="bi bi-telephone-fill me-2 text-success"></i> +234 801 234 5678</p>
+              <p><i class="bi bi-clock-fill me-2 text-success"></i> Mon - Fri: 9:00 AM - 6:00 PM</p>
+              <hr>
+              <div class="d-flex gap-3">
+                <a href="#" class="text-success fs-4"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-success fs-4"><i class="bi bi-twitter-x"></i></a>
+                <a href="#" class="text-success fs-4"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-success fs-4"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-5 bg-light-green">
+    <div class="container">
+      <h2 class="text-center mb-3 fw-bold">Frequently Asked Questions</h2>
+      <p class="text-center text-muted mb-5">
+        Answers to the most common questions schools and parents ask.
+      </p>
+      <div class="accordion shadow-sm" id="faqAccordion">
+        <!-- FAQ items -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+              Is My Child Today free to use?
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              We offer a <strong>30-day free trial</strong> so schools can experience all features before choosing a plan.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+              Do parents need to install an app?
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              No app is required. Parents receive instant updates via <strong>SMS</strong>.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+              How secure is the student data?
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              All data is stored securely and only authorized school staff can access it.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingFour">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+              Can I upgrade my plan later?
+            </button>
+          </h2>
+          <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Yes, you can upgrade anytime — your data will remain intact.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingFive">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive">
+              Do I need internet for it to work?
+            </button>
+          </h2>
+          <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Staff need internet, but Parents receive SMS instantly even without internet.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-5">
+        <p class="fw-bold fs-5 mb-3">Still have questions?</p>
+        <a href="#contact" class="btn btn-success px-4 py-2 rounded-pill shadow-sm">
+          Get in Touch With Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer mt-5">
+    <div class="container py-5">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6">
+          <h4 class="fw-bold text-white">My Child Today</h4>
+          <p class="small text-light">
+            Helping parents stay connected to their child’s growth, learning, and wellbeing.
+          </p>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <h6 class="fw-bold text-white mb-3">Quick Links</h6>
+          <ul class="list-unstyled small">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#faq">FAQs</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h6 class="fw-bold text-white mb-3">Contact</h6>
+          <p class="small mb-1 text-light">📍 Ilorin, Kwara State, Nigeria</p>
+          <p class="small mb-1 text-light">📞 +234 803 000 0000</p>
+          <p class="small text-light">✉️ support@mychildtoday.com</p>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h6 class="fw-bold text-white mb-3">Follow Us</h6>
+          <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom text-center py-3">
+      <p class="small mb-0 text-light">&copy; 2025 My child Today. All Rights Reserved.</p>
+    </div>
+    <button id="backToTop" class="btn btn-success"><i class="bi bi-arrow-up"></i></button>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Show button when scrolling down
+    window.onscroll = function () {
+      const btn = document.getElementById("backToTop");
+      btn.style.display = (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) ? "block" : "none";
+    };
+
+    // Scroll to top when clicked
+    document.getElementById("backToTop").onclick = function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+  </script>
+
+<button id="test">Test Backend</button>
+
+<script>
+$("#test").click(function(){
+  $.get("http://localhost:5000", function(data){
+    alert(data);
+  });
+});
+</script>
+
+    
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

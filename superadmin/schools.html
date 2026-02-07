@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Schools - Super Admin | My Child Today</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Custom Dashboard CSS -->
+   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+      width: 250px;
+      background-color: #198754;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      padding: 1.5rem 1rem;
+    }
+
+    .sidebar-header {
+      font-size: 1.2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      padding-bottom: 0.75rem;
+      text-align: center;
+    }
+
+    .sidebar-profile {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .sidebar-profile img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar-profile .name {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #fff;
+    }
+
+    .nav-link {
+      color: #e9ecef;
+      margin: 0.3rem 0;
+      border-radius: 0.5rem;
+      padding: 0.6rem 0.9rem;
+      transition: all 0.3s;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      background-color: #157347;
+      color: #fff;
+    }
+
+    /* Logout button */
+    .logout-section {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .logout-btn {
+      width: 100%;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.6rem 0;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      background-color: #bb2d3b;
+    }
+
+    /* Main content area */
+    .content {
+      margin-left: 250px;
+      background-color: #fff;
+      min-height: 100vh;
+    }
+
+    /* Toast custom positioning */
+    #toastContainer {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 2000;
+    }
+
+     /* --------------------------------------
+Global Font & Layout Adjustments
+--------------------------------------- */
+body, .sidebar, .content, .card, .table, button, a, h1, h2, h3, h4, h5, h6, p, span, td, th {
+  font-size: 11px !important;
+  line-height: 1.2 !important;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+}
+
+/* Headings slightly larger for clarity */
+h1, h2, h3 {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+/* --------------------------------------
+Sidebar Styling (Fixed + Gray Theme)
+--------------------------------------- */
+.sidebar {
+  width: 190px !important;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  background-color: #2f3e46; /* elegant gray-blue tone */
+  color: #fff !important;
+  z-index: 100;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Sidebar Header */
+.sidebar .sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 0.8rem;
+  padding: 0 10px;
+}
+.sidebar .sidebar-header span {
+  font-size: 11px !important;
+  font-weight: 600;
+  color: #fff !important;
+}
+
+/* Sidebar Links */
+.sidebar .nav-links {
+  flex-grow: 1;
+}
+.sidebar .nav-link {
+  display: flex;
+  align-items: center;
+  font-size: 10.5px !important;
+  padding: 6px 10px !important;
+  border-radius: 6px;
+  color: #e0e0e0 !important;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.sidebar .nav-link i {
+  font-size: 13px !important;
+  margin-right: 6px;
+}
+
+/* Active or Hover States */
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background-color: #009688; /* teal-blue highlight */
+  color: #fff !important;
+}
+
+/* --------------------------------------
+Logout Button (Bottom of Sidebar)
+--------------------------------------- */
+.logout-section {
+  padding: 0.5rem 10px !important;
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.logout-btn {
+  font-size: 10px !important;
+  padding: 5px 8px !important;
+  border-radius: 5px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  background-color: #dc3545;
+  color: #fff !important;
+  border: none;
+  transition: background 0.2s ease;
+}
+.logout-btn i {
+  font-size: 12px !important;
+}
+.logout-btn:hover {
+  background-color: #c82333;
+}
+
+/* --------------------------------------
+Dashboard Content Area
+--------------------------------------- */
+.content {
+  margin-left: 190px;
+  padding: 1rem !important;
+  font-size: 11px !important;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+/* --------------------------------------
+Cards and Stats
+--------------------------------------- */
+.card {
+  padding: 0.6rem !important;
+  border-radius: 8px !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  background-color: #fff;
+}
+.stat-card h6 {
+  font-size: 10px !important;
+}
+.stat-card h3 {
+  font-size: 15px !important;
+}
+.stat-icon {
+  font-size: 1.2rem !important;
+}
+
+/* --------------------------------------
+Tables
+--------------------------------------- */
+.table th, .table td {
+  font-size: 10px !important;
+  padding: 4px 6px !important;
+  vertical-align: middle !important;
+}
+.table th {
+  font-weight: 600 !important;
+}
+
+/* --------------------------------------
+Charts
+--------------------------------------- */
+.chart-container {
+  font-size: 10px !important;
+}
+canvas {
+  max-height: 180px !important;
+}
+
+/* --------------------------------------
+Floating CTA
+--------------------------------------- */
+.floating-cta {
+  font-size: 10.5px !important;
+  padding: 7px 12px !important;
+  border-radius: 30px !important;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 200;
+  background-color: #009688;
+  color: #fff;
+  border: none;
+  transition: background 0.25s ease;
+}
+.floating-cta:hover {
+  background-color: #00796b;
+}
+
+/* --------------------------------------
+Alignment Cleanup
+--------------------------------------- */
+.row, .col-md-4, .col-md-6 {
+  margin: 0 !important;
+  padding: 0.3rem !important;
+}
+  </style>
+
+  <!-- Theme + Profile Sync -->
+  <script>
+    (function(){
+      const theme = localStorage.getItem('mct_theme') || 'light';
+      if (theme === 'dark') document.documentElement.classList.add('mct-dark');
+
+      window.addEventListener('DOMContentLoaded', () => {
+        const photo = localStorage.getItem('mct_profilePhoto');
+        const name = localStorage.getItem('mct_fullName');
+
+        const imgEl = document.getElementById('sidebarPhoto');
+        const nameEl = document.getElementById('sidebarName');
+
+        if (photo) imgEl.src = photo;
+        if (name) nameEl.textContent = name;
+      });
+    })();
+  </script>
+</head>
+
+<body>
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="sidebar-profile">
+        <img id="profilePhoto" src="../assets/images/superadmin.jpeg" alt="Super Admin" class="rounded-circle" width="40" height="40">
+        <div class="name" id="sidebarName">Super Admin</div>
+      </div>
+
+      
+
+      <ul class="nav flex-column flex-grow-1">
+        <li class="nav-item">
+          <a href="dashboard.html" class="nav-link"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a href="schools.html" class="nav-link active"><i class="bi bi-building me-2"></i>Manage Schools</a>
+        </li>
+        <li class="nav-item">
+          <a href="admins.html" class="nav-link"><i class="bi bi-person-gear me-2"></i>Manage Admins</a>
+        </li>
+        <li class="nav-item">
+          <a href="reports.html" class="nav-link"><i class="bi bi-file-earmark-bar-graph me-2"></i>Reports</a>
+        </li>
+        <li class="nav-item">
+          <a href="settings.html" class="nav-link"><i class="bi bi-gear me-2"></i>Settings</a>
+        </li>
+      </ul>
+
+      <div class="logout-section">
+        <button class="logout-btn" id="logoutBtn">
+          <i class="bi bi-box-arrow-right me-2"></i>Logout
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="content p-4 w-100">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="fw-bold mb-0">Manage Schools</h3>
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addSchoolModal" id="addSchoolBtn">
+          <i class="bi bi-plus-circle me-1"></i> Add School
+        </button>
+      </div>
+
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <table class="table table-striped table-hover" id="schoolsTable">
+            <thead class="table-success">
+              <tr>
+                <th>#</th>
+                <th>School Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Harmony High School</td>
+                <td>Ilorin, Kwara State</td>
+                <td>info@harmonyhigh.edu.ng</td>
+                <td>09012345678</td>
+                <td>
+                  <button class="btn btn-sm btn-primary edit-btn me-1"><i class="bi bi-pencil"></i></button>
+                  <button class="btn btn-sm btn-danger delete-btn"><i class="bi bi-trash"></i></button>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Unity Model College</td>
+                <td>Lagos, Nigeria</td>
+                <td>admin@unitymodel.ng</td>
+                <td>08098765432</td>
+                <td>
+                  <button class="btn btn-sm btn-primary edit-btn me-1"><i class="bi bi-pencil"></i></button>
+                  <button class="btn btn-sm btn-danger delete-btn"><i class="bi bi-trash"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add/Edit School Modal -->
+  <div class="modal fade" id="addSchoolModal" tabindex="-1" aria-labelledby="addSchoolModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title" id="addSchoolModalLabel">Add New School</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="schoolForm">
+            <input type="hidden" id="editRowIndex">
+            <div class="mb-3">
+              <label for="schoolName" class="form-label">School Name</label>
+              <input type="text" id="schoolName" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="schoolAddress" class="form-label">Address</label>
+              <input type="text" id="schoolAddress" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="schoolEmail" class="form-label">Email</label>
+              <input type="email" id="schoolEmail" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="schoolPhone" class="form-label">Phone</label>
+              <input type="text" id="schoolPhone" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-success w-100" id="saveBtn">Save School</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title"><i class="bi bi-exclamation-triangle me-2"></i> Confirm Delete</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body text-center">
+          <p class="fs-5">Are you sure you want to delete <strong id="schoolToDeleteName"></strong>?</p>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Yes, Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="toast-container position-fixed"></div>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      let rowToDelete = null;
+
+      // ✅ LOGOUT FUNCTION
+      $('#logoutBtn').click(function() {
+        const confirmLogout = confirm("Are you sure you want to logout?");
+        if (confirmLogout) {
+          localStorage.clear(); // clear any saved session/profile
+          window.location.href = "../login.html"; // redirect to login page
+        }
+      });
+
+      function refreshNumbers() {
+        $('#schoolsTable tbody tr').each(function(index) {
+          $(this).find('td:first').text(index + 1);
+        });
+      }
+
+      function showToast(message, colorClass) {
+        const toastId = 'toast-' + Date.now();
+        const toastHTML = `
+          <div id="${toastId}" class="toast align-items-center text-white ${colorClass} border-0 mb-2" role="alert">
+            <div class="d-flex">
+              <div class="toast-body">${message}</div>
+              <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+          </div>`;
+        $('#toastContainer').append(toastHTML);
+        const toast = new bootstrap.Toast(document.getElementById(toastId), { delay: 2500 });
+        toast.show();
+        document.getElementById(toastId).addEventListener('hidden.bs.toast', function() {
+          $(this).remove();
+        });
+      }
+
+      $('#addSchoolBtn').click(function() {
+        $('#addSchoolModalLabel').text('Add New School');
+        $('#saveBtn').text('Save School');
+        $('#schoolForm')[0].reset();
+        $('#editRowIndex').val('');
+      });
+
+      $('#schoolForm').on('submit', function(e) {
+        e.preventDefault();
+
+        const name = $('#schoolName').val();
+        const address = $('#schoolAddress').val();
+        const email = $('#schoolEmail').val();
+        const phone = $('#schoolPhone').val();
+        const editIndex = $('#editRowIndex').val();
+
+        if (editIndex === '') {
+          const rowCount = $('#schoolsTable tbody tr').length + 1;
+          const newRow = `
+            <tr>
+              <td>${rowCount}</td>
+              <td>${name}</td>
+              <td>${address}</td>
+              <td>${email}</td>
+              <td>${phone}</td>
+              <td>
+                <button class="btn btn-sm btn-primary edit-btn me-1"><i class="bi bi-pencil"></i></button>
+                <button class="btn btn-sm btn-danger delete-btn"><i class="bi bi-trash"></i></button>
+              </td>
+            </tr>`;
+          $('#schoolsTable tbody').append(newRow);
+          showToast('🟢 School added successfully!', 'bg-success');
+        } else {
+          const row = $('#schoolsTable tbody tr').eq(editIndex);
+          row.find('td').eq(1).text(name);
+          row.find('td').eq(2).text(address);
+          row.find('td').eq(3).text(email);
+          row.find('td').eq(4).text(phone);
+          showToast('🟡 Changes saved successfully!', 'bg-warning text-dark');
+        }
+
+        $('#schoolForm')[0].reset();
+        $('#addSchoolModal').modal('hide');
+      });
+
+      $(document).on('click', '.edit-btn', function() {
+        const row = $(this).closest('tr');
+        const index = row.index();
+        $('#schoolName').val(row.find('td').eq(1).text());
+        $('#schoolAddress').val(row.find('td').eq(2).text());
+        $('#schoolEmail').val(row.find('td').eq(3).text());
+        $('#schoolPhone').val(row.find('td').eq(4).text());
+        $('#editRowIndex').val(index);
+        $('#addSchoolModalLabel').text('Edit School');
+        $('#saveBtn').text('Save Changes');
+        $('#addSchoolModal').modal('show');
+      });
+
+      $(document).on('click', '.delete-btn', function() {
+        rowToDelete = $(this).closest('tr');
+        const schoolName = rowToDelete.find('td').eq(1).text();
+        $('#schoolToDeleteName').text(`"${schoolName}"`);
+        $('#confirmDeleteModal').modal('show');
+      });
+
+      $('#confirmDeleteBtn').click(function() {
+        if (rowToDelete) {
+          rowToDelete.remove();
+          refreshNumbers();
+          $('#confirmDeleteModal').modal('hide');
+          showToast('🔴 School deleted successfully!', 'bg-danger');
+        }
+      });
+    });
+
+    // Show saved Super Admin photo in topbar
+  const savedPhoto = localStorage.getItem('mct_profilePhoto');
+  const profileImg = document.getElementById('profilePhoto');
+
+  if (profileImg) {
+    profileImg.src = savedPhoto ? savedPhoto : "../assets/images/superadmin.jpeg";
+  }
+  </script>
+</body>
+</html>
