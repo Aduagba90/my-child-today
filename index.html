@@ -28,7 +28,8 @@ img {
 .hero-section .carousel,
 .hero-section .carousel-inner,
 .hero-section .carousel-item {
-  height: 100%;
+  height: 85vh;
+  max-height: 800px;
   z-index: 1;
 }
 
@@ -93,10 +94,13 @@ img {
 
   /* HERO BUTTONS STACK */
   .hero-text .btn {
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-  }
+  display: block;
+  width: auto;
+  min-width: 180px;
+  margin: 8px auto;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+}
 
   /* CAROUSEL IMAGE BETTER CROPPING */
   .hero-section .carousel-inner img {
@@ -105,9 +109,11 @@ img {
 
   /* NAVBAR MOBILE BUTTONS */
   .navbar .btn {
-    width: 100%;
-    margin-top: 10px;
-  }
+  width: 100%;
+  padding: 8px;
+  font-size: 0.95rem;
+  margin-top: 8px;
+}
 
   /* SECTION SPACING */
   section {
@@ -129,6 +135,11 @@ img {
   .form-control {
     font-size: 16px; /* Prevents iPhone zoom */
   }
+
+  .navbar-toggler {
+  padding: 4px 8px;
+  font-size: 0.9rem;
+}
 
 }
 
@@ -164,8 +175,8 @@ img {
           <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
           <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
         </ul>
-        <a href="login.html" class="btn btn-outline-success w-100 mt-2">Login</a>
-        <a href="signup.html" class="btn btn-success w-100 mt-2">Sign Up</a>
+        <a href="login.html" class="btn btn-outline-success ms-lg-2 mt-2 mt-lg-0">Login</a>
+        <a href="signup.html" class="btn btn-success ms-lg-2 mt-2 mt-lg-0">Sign Up</a>
       </div>
     </div>
   </nav>
