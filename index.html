@@ -671,18 +671,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!heroCarouselEl || !heroText) return;
 
-  heroCarouselEl.addEventListener('slide.bs.carousel', function () {
+  heroCarouselEl.addEventListener('slide.bs.carousel', () => {
     heroText.classList.add('fade-out');
   });
 
-  heroCarouselEl.addEventListener('slid.bs.carousel', function () {
-    setTimeout(() => {
-      heroText.classList.remove('fade-out');
-    }, 50);
+  heroCarouselEl.addEventListener('slid.bs.carousel', () => {
+    heroText.classList.remove('fade-out');
   });
 });
 </script>
-
 
 
 </body>
