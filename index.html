@@ -67,10 +67,15 @@ img {
   transition: all 0.6s ease;
 }
 
-.hero-text.fade-out {
-  opacity: 0;
-  transform: translate(-50%, -40%) scale(0.95);
+.hero-text-content {
+  transition: all 0.6s ease;
 }
+
+.hero-text-content.fade-out {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
 
 /* Navbar smooth transition */
 .navbar {
@@ -128,12 +133,12 @@ html {
 
   /* HERO BUTTONS STACK */
   .hero-text .btn {
-  display: block;
-  width: auto;
-  min-width: 180px;
-  margin: 8px auto;
-  padding: 10px 20px;
+  display: inline-block;
+  width: 180px;
+  margin: 8px 6px;
+  padding: 10px 0;
   font-size: 0.95rem;
+  text-align: center;
 }
 
   /* CAROUSEL IMAGE BETTER CROPPING */
@@ -278,6 +283,7 @@ html {
 
   <!-- Center Text Overlay -->
   <div class="hero-text">
+  <div class="hero-text-content">
     <h1 class="hero-title">
       My Child Today – The Easiest Way to Manage Attendance & Notify Parents Instantly
     </h1>
@@ -285,7 +291,7 @@ html {
     <p class="hero-description">
       Track attendance and send SMS notifications to parents effortlessly. Keep parents informed in real time.
     </p>
-
+  </div>
     <a href="signup.html" class="btn btn-success btn-lg me-3">
       Get Started Free
     </a>
@@ -633,7 +639,7 @@ window.addEventListener("scroll", function () {
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const heroCarouselEl = document.querySelector('#heroCarousel');
-  const heroText = document.querySelector('.hero-text');
+  const heroText = document.querySelector('.hero-text-content');
 
   if (!heroCarouselEl || !heroText) return;
 
