@@ -69,17 +69,14 @@ img {
 
 /* Hero Entrance Animation + Carousel Transition */
 .hero-text-content {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: heroFadeIn 0.9s ease forwards;
-  transition: all 0.6s ease;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-@keyframes heroFadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.hero-text-content.fade-out {
+  opacity: 0;
+  transform: translateY(-12px);
 }
 
 .hero-text-content.fade-out {
@@ -674,15 +671,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (!heroCarouselEl || !heroText) return;
 
-  heroCarouselEl.addEventListener('slide.bs.carousel', () => {
+  heroCarouselEl.addEventListener('slide.bs.carousel', function () {
     heroText.classList.add('fade-out');
   });
 
-  heroCarouselEl.addEventListener('slid.bs.carousel', () => {
-    heroText.classList.remove('fade-out');
+  heroCarouselEl.addEventListener('slid.bs.carousel', function () {
+    setTimeout(() => {
+      heroText.classList.remove('fade-out');
+    }, 50);
   });
 });
 </script>
+
 
 
 </body>
