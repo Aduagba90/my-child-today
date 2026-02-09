@@ -101,19 +101,6 @@ img {
   transform: translateY(-10px);
 }
 
-.hero-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-
-.hero-buttons .btn {
-  min-width: 190px;
-}
-
-
 
 /* Navbar smooth transition */
 .navbar {
@@ -190,15 +177,13 @@ html {
   }
 
   /* HERO BUTTONS STACK */
-@media (max-width: 768px) {
-  .hero-buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .hero-buttons .btn {
-    width: 220px;
-  }
+ .hero-text .btn {
+  display: block;
+  width: 220px;
+  margin: 10px auto;
+  padding: 10px 0;
+  font-size: 0.95rem;
+  text-align: center;
 }
 
   /* CAROUSEL IMAGE BETTER CROPPING */
@@ -279,16 +264,8 @@ html {
           <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
           <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
         </ul>
-        <div class="hero-buttons">
-        <a href="signup.html" class="btn btn-success btn-lg">
-          Get Started Free
-        </a>
-
-        <a href="#pricing" class="btn btn-outline-light btn-lg">
-          See Plans
-        </a>
-      </div>
-
+        <a href="login.html" class="btn btn-outline-success ms-lg-2 mt-2 mt-lg-0">Login</a>
+        <a href="signup.html" class="btn btn-success ms-lg-2 mt-2 mt-lg-0">Sign Up</a>
       </div>
     </div>
   </nav>
