@@ -87,18 +87,18 @@ img {
 /* Hero Entrance Animation + Carousel Transition */
 .hero-text-content {
   opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(0) scale(1);
+  filter: blur(0px);
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.45s ease;
 }
 
 .hero-text-content.fade-out {
   opacity: 0;
-  transform: translateY(-12px);
-}
-
-.hero-text-content.fade-out {
-  opacity: 0;
-  transform: translateY(-10px);
+  transform: translateY(-14px) scale(0.985);
+  filter: blur(3px);
 }
 
 
