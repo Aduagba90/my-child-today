@@ -688,23 +688,31 @@ window.addEventListener("scroll", function () {
 
 
 <!-- Hero text animation script -->
+<!-- ===== OPTION B: PROFESSIONAL SYNC HERO TEXT ===== -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const heroCarouselEl = document.querySelector('#heroCarousel');
-  const heroText = document.querySelector('.hero-text-content');
 
-  if (!heroCarouselEl || !heroText) return;
+  const heroCarousel = document.querySelector("#heroCarousel");
+  const heroText = document.querySelector(".hero-text-content");
 
-  heroCarouselEl.addEventListener('slide.bs.carousel', () => {
-    heroText.classList.add('fade-out');
+  if (!heroCarousel || !heroText) return;
+
+  heroCarousel.addEventListener("slide.bs.carousel", function () {
+    heroText.classList.remove("fade-in");
+    heroText.classList.add("fade-out");
   });
 
-  heroCarouselEl.addEventListener('slid.bs.carousel', () => {
-    heroText.classList.remove('fade-out');
+  heroCarousel.addEventListener("slid.bs.carousel", function () {
+
+    setTimeout(() => {
+      heroText.classList.remove("fade-out");
+      heroText.classList.add("fade-in");
+    }, 120);
+
   });
+
 });
 </script>
-
 
 </body>
 </html>
