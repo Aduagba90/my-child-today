@@ -84,21 +84,25 @@ img {
 }
 
 
-/* Hero Entrance Animation + Carousel Transition */
+/* ===== HERO TEXT SYNC ANIMATION (Option B Professional) ===== */
+
 .hero-text-content {
   opacity: 1;
-  transform: translateY(0) scale(1);
-  filter: blur(0px);
-  transition:
-    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.45s ease;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  will-change: opacity, transform;
 }
 
+/* When slide is changing OUT */
 .hero-text-content.fade-out {
   opacity: 0;
-  transform: translateY(-14px) scale(0.985);
-  filter: blur(3px);
+  transform: translateY(-16px);
+}
+
+/* When new slide is coming IN */
+.hero-text-content.fade-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 
