@@ -16,6 +16,17 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
+
+    @media (max-width: 768px) {
+          .sidebar {
+            display: none !important;
+          }
+
+          .content {
+            margin-left: 0 !important;
+          }
+        }
+
     /* Styles — kept largely from your original with minimal changes */
           body, .sidebar, .content, .card, .table, button, a, p, span, td, th {
         font-family: 'Roboto', sans-serif;
@@ -61,10 +72,6 @@
             }
 
           }
-
-          .d-flex {
-                min-height: 100vh;
-              }
 
           
 
@@ -142,6 +149,32 @@
 </head>
 <body>
 
+  <!-- Mobile Offcanvas Sidebar -->
+        <div class="offcanvas offcanvas-start d-md-none"
+            tabindex="-1"
+            id="mobileSidebar">
+
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title">School Admin</h5>
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="offcanvas"></button>
+          </div>
+
+          <div class="offcanvas-body p-0">
+
+            <!-- SAME MENU AS SIDEBAR -->
+            <ul class="nav flex-column px-3">
+              <li class="nav-item"><a href="#" class="nav-link active">Dashboard</a></li>
+              <li class="nav-item"><a href="students.html" class="nav-link">Students</a></li>
+              <li class="nav-item"><a href="attendance.html" class="nav-link">Attendance</a></li>
+              <li class="nav-item"><a href="sms.html" class="nav-link">SMS</a></li>
+              <li class="nav-item"><a href="reports.html" class="nav-link">Reports</a></li>
+            </ul>
+
+          </div>
+        </div>
+
   <div class="d-flex">
     <!-- Sidebar -->
     <nav class="sidebar">
@@ -167,6 +200,12 @@
 
     <!-- Main content -->
     <main class="content flex-grow-1 p-4">
+      <!-- Mobile Hamburger Button -->
+        <button class="btn btn-dark d-md-none mb-3"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#mobileSidebar">
+          <i class="bi bi-list"></i>
+        </button>
       <h2 class="fw-bold mb-1">Dashboard</h2>
       <p class="text-muted mb-4">Welcome back! Here’s what’s happening at your school today.</p>
       <hr>
