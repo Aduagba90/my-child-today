@@ -29,51 +29,54 @@
         font-size: 18px;
       }
 
-      /* ===== MOBILE DASHBOARD FIX ===== */
-          @media (max-width: 768px) {
+      /* ===== FINAL MOBILE DASHBOARD LAYOUT ===== */
+            @media (max-width: 768px) {
 
-            body {
-              font-size: 15px;
+              .d-flex {
+                flex-direction: column;
+              }
+
+              /* Sidebar becomes top block */
+              .sidebar {
+                position: relative;
+                width: 100% !important;
+                min-height: auto;
+                height: auto;
+                flex-direction: column;
+              }
+
+              /* Content full width */
+              .content {
+                margin-left: 0 !important;
+                width: 100%;
+                padding: 1rem !important;
+              }
+
+              /* Improve mobile readability */
+              body {
+                font-size: 15px;
+              }
+
+              .card {
+                border-radius: 12px;
+              }
+
+              .stat-card h3 {
+                font-size: 20px !important;
+              }
+              
+               .sidebar .nav-link{
+                  font-size:14px !important;
+                  padding:10px !important;
+                }
+
             }
 
-            /* Sidebar becomes top section */
-            .sidebar {
-              position: relative;
-              width: 100% !important;
-              min-height: auto;
-              height: auto;
-              flex-direction: column;
+
+          .d-flex {
+              min-height: 100vh;
             }
 
-            /* Content takes full width */
-            .content {
-              margin-left: 0 !important;
-              width: 100%;
-              padding: 1rem !important;
-            }
-
-            .card {
-              border-radius: 12px;
-            }
-
-            .stat-card h3 {
-              font-size: 20px !important;
-            }
-
-          }
-
-
-        @media (max-width: 768px) {
-
-            .card {
-              border-radius: 12px;
-            }
-
-            .stat-card h3 {
-              font-size: 20px !important;
-            }
-
-          }
 
 
       .sidebar {
