@@ -17,30 +17,6 @@
 
   <style>
 
-    /* ===== Production Mobile Sidebar ===== */
-
-          .offcanvas {
-            width: 240px;
-          }
-
-          .offcanvas .nav-link {
-            padding: 10px 12px;
-            border-radius: 8px;
-            color: #333;
-            font-weight: 500;
-            transition: all 0.2s ease;
-          }
-
-          .offcanvas .nav-link:hover {
-            background: #f1f3f5;
-          }
-
-          .offcanvas .nav-link.active {
-            background: #009688;
-            color: white;
-          }
-
-
     @media (max-width: 768px) {
           .sidebar {
             display: none !important;
@@ -169,13 +145,6 @@
     .stat-card:hover { transform: scale(1.03); }
 
     @media (max-width:768px) { .chart-container { margin-top:1rem; } }
-
-    .offcanvas {
-        transition: transform 0.35s ease;
-      }
-
-
-    
   </style>
 </head>
 <body>
@@ -232,13 +201,8 @@
         </div>
       </div>
 
-      <!-- Hamburger for mobile -->
-        <button class="btn btn-primary d-md-none" id="sidebarToggle" 
-                style="position:fixed; top:10px; left:10px; z-index:300;">
-          <i class="bi bi-list fs-3"></i>
-        </button>
 
-
+  <div class="d-flex">
     <!-- Sidebar -->
     <nav class="sidebar">
       <div class="sidebar-header d-flex align-items-center mb-4">
@@ -643,27 +607,6 @@
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
-
-  // Auto close mobile sidebar when clicking menu link
-    document.querySelectorAll('#mobileMenu .nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        const sidebar = bootstrap.Offcanvas.getInstance(
-          document.getElementById('mobileSidebar')
-        );
-        if (sidebar) sidebar.hide();
-      });
-    });
-
-    // Highlight active mobile page automatically
-      const currentPage = window.location.pathname.split("/").pop();
-
-      document.querySelectorAll('#mobileMenu .nav-link').forEach(link => {
-        if (link.getAttribute('href') === currentPage) {
-          link.classList.add('active');
-        }
-      });
-
-
 </script>
 </body>
 </html>
