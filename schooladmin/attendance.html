@@ -36,9 +36,55 @@
   }
 }
 
+@media (max-width: 768px) {
+
+  .filters-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .summary-badges {
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .content h3 {
+    font-size: 14px !important;
+  }
+
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+
 
     .content { padding-bottom: 40px; }
-    .search-row { max-width: 50%; min-width: 300px; }
+
+    .search-row {
+  width: 100%;
+  max-width: 520px;
+}
+
+@media (max-width: 768px) {
+  .search-row {
+    max-width: 100%;
+    min-width: 0;
+  }
+}
+
+
     .filters-row .form-select { min-width: 180px; }
     .filters-row .btn { white-space: nowrap; }
     .summary-badges .badge { font-weight: 600; padding: 8px 10px; border-radius: 8px; }
@@ -281,7 +327,7 @@ Alignment Cleanup
       <hr>
 
       <!-- Header row -->
-      <div class="d-flex justify-content-between align-items-start mb-4 flex-wrap">
+      <div class="d-flex justify-content-between align-items-start mb-4 flex-nowrap">
         <div>
           <h3 class="fw-bold mb-1">Attendance</h3>
           <p class="text-muted mb-0">Manage student attendance for today</p>
