@@ -60,19 +60,20 @@ Sidebar Styling (Fixed + Gray Theme)
 --------------------------------------- */
 .sidebar {
   width: 190px !important;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
   overflow-y: auto;
-  background-color: #2f3e46; /* elegant gray-blue tone */
+  background-color: #2f3e46;
   color: #fff !important;
   z-index: 100;
   padding-top: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
+
 
 /* Sidebar Header */
 .sidebar .sidebar-header {
