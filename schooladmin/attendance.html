@@ -13,44 +13,6 @@
   <link rel="stylesheet" href="css/dashboard.css">
 
   <style>
-
-    /* MOBILE HAMBURGER SIDEBAR */
-@media (max-width: 768px) {
-
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 240px;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    z-index: 1050;
-  }
-
-  .sidebar.mobile-visible {
-    transform: translateX(0);
-  }
-
-  .content {
-    margin-left: 0 !important;
-    width: 100%;
-    overflow-x: hidden;
-  }
-
-  /* Add scroll to content */
-  body {
-    overflow-x: hidden;
-  }
-
-  /* Make search & header full width on mobile */
-  .search-row { max-width: 100%; min-width: auto; }
-  .filters-row { flex-direction: column; align-items: stretch; gap: 0.5rem; }
-}
-
-
-
-
     .content { padding-bottom: 40px; }
     .search-row { max-width: 50%; min-width: 300px; }
     .filters-row .form-select { min-width: 180px; }
@@ -89,19 +51,20 @@ Sidebar Styling (Fixed + Gray Theme)
 --------------------------------------- */
 .sidebar {
   width: 190px !important;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
   overflow-y: auto;
-  background-color: #2f3e46; /* elegant gray-blue tone */
+  background-color: #2f3e46;
   color: #fff !important;
   z-index: 100;
   padding-top: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
+
 
 /* Sidebar Header */
 .sidebar .sidebar-header {
