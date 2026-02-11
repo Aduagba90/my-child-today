@@ -14,6 +14,55 @@
   <link rel="stylesheet" href="css/dashboard.css">
   <style>
 
+    /* ===== MOBILE WIDTH SAFETY FIX ===== */
+        @media (max-width: 768px) {
+
+          html, body {
+            overflow-x: hidden;
+            width: 100%;
+          }
+
+          .content {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+          }
+
+          /* Table scroll instead of stretching page */
+          .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+          }
+
+          table {
+            min-width: 700px;
+          }
+
+          /* Search bar fix */
+          .search-bar .input-group {
+            width: 100% !important;
+          }
+
+        }
+
+        /* ===== MOBILE TABLE LAYOUT FIX ===== */
+          @media (max-width: 768px) {
+
+            #studentsTable th,
+            #studentsTable td {
+              white-space: nowrap;
+            }
+
+            /* Keep action buttons inline */
+            #studentsTable td:last-child {
+              display: flex;
+              gap: 4px;
+            }
+
+          }
+
+
+
     /* ===== MOBILE HAMBURGER SIDEBAR ===== */
         @media (max-width: 768px) {
 
@@ -307,7 +356,7 @@ Alignment Cleanup
       <h5 class="fw-bold mb-4">Student Management</h5>
 
       <!-- Action Buttons -->
-      <div class="d-flex justify-content-between align-items-center mb-4">
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
         <div>
           <button class="btn btn-success me-2" id="addStudentBtn">
             <i class="bi bi-plus-circle me-1"></i> Add Student
