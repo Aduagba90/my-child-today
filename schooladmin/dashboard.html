@@ -61,22 +61,7 @@
             }
 
           }
-
-
-        @media (max-width: 768px) {
-
-            .card {
-              border-radius: 12px;
-            }
-
-            .stat-card h3 {
-              font-size: 20px !important;
-            }
-
-          }
-
           
-
 
       .sidebar {
       width: 190px !important;
@@ -95,6 +80,25 @@
       flex-direction: column;
       justify-content: space-between;
     }
+
+    /* ===== FINAL MOBILE SIDEBAR FIX ===== */
+        @media (max-width: 768px) {
+
+          .sidebar {
+            position: relative !important;
+            width: 100% !important;
+            min-height: auto !important;
+            height: auto !important;
+            bottom: auto !important;
+          }
+
+          .content {
+            margin-left: 0 !important;
+            width: 100%;
+          }
+
+        }
+
 
     .sidebar .sidebar-header { display:flex; align-items:center; gap:6px; margin-bottom:.8rem; padding:0 10px; }
     .sidebar .sidebar-header span { font-size:11px !important; font-weight:600; color:#fff !important; }
