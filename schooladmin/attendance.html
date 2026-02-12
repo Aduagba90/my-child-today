@@ -671,6 +671,14 @@ closeSidebarBtn?.addEventListener('click', () => {
   sidebar.classList.remove('mobile-visible');
 });
 
+document.querySelectorAll('.sidebar .nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    if (window.innerWidth < 768) {
+      sidebar.classList.remove('mobile-visible');
+    }
+  });
+});
+
 
 // Toggle sidebar visibility on click
 sidebarToggle?.addEventListener('click', () => {
