@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Attendance - My Child Today</title>
 
   <!-- Bootstrap CSS -->
@@ -14,44 +14,66 @@
 
   <style>
 
-    .table-responsive {
-  width: 100%;
-}
-
-
-    /* ===== MOBILE READABILITY FIX ===== */
+    /* ===== MOBILE MASTER FIX ===== */
 @media (max-width: 768px) {
 
-  body {
-    font-size: 14px;
+  html, body {
+    font-size: 15px !important;
+    overflow-x: hidden;
   }
 
   .content {
-    padding: 14px !important;
-  }
-
-  .table th, .table td {
-    font-size: 13px !important;
-    padding: 8px 6px !important;
-  }
-
-  .sidebar {
-    width: 220px !important;
+    padding: 16px !important;
+    margin-left: 0 !important;
   }
 
   h1, h2, h3 {
-    font-size: 16px !important;
+    font-size: 18px !important;
+  }
+
+  p, span, td, th, label {
+    font-size: 14px !important;
+  }
+
+  .table th, .table td {
+    font-size: 14px !important;
+    padding: 8px !important;
+  }
+
+  .btn {
+    font-size: 14px !important;
+    padding: 8px 12px !important;
   }
 
   .badge {
-    font-size: 12px !important;
-  }
-
-  button, .btn {
     font-size: 13px !important;
   }
 
 }
+
+body {
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  .filters-row > div {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .filters-row select,
+  .filters-row button {
+    width: 100%;
+  }
+}
+
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
 
 
     /* ===== MOBILE HAMBURGER SIDEBAR ===== */
@@ -61,7 +83,7 @@
     top: 0;
     left: 0;
     height: 100%;
-    width: 240px;
+    width: 230px !important;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     z-index: 1050;
@@ -152,7 +174,7 @@ h1, h2, h3 {
 Sidebar Styling (Fixed + Gray Theme)
 --------------------------------------- */
 .sidebar {
-  width: 190px !important;
+  width: 190px;
   min-height: 100vh;
   height: 100%;
   position: fixed;
